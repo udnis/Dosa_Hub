@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html 	xmlns="http://www.w3.org/1999/xhtml"      
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title> Dosa Shop</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+	<form th:action="@{/orders}" method="POST" th:object="${order}">
+	<div class="customerdetails">
+		
+		.	
+			<label for="name">Name</label>
+		  		<input type="text" th:field="*{name}">
+		   		<p class = "Error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
+		   		
+		  	<label for="city">city</label>
+			  <input type="text" th:field="*{city}">
+		   		<p class = "Error"  th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Incorrect city</p>
+		   		
+			  <label for="state">state</label>
+			  <input type="text" th:field="*{state}">
+		   		<p class = "Error"  th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Incorrect state</p>
+			  
+			  <label for="zip">zip</label>
+			  <input type="text" th:field="*{zip}">
+		   		<p class = "Error"  th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Incorrect zip</p>		 
+			  
+			  <label for="ccNumber">ccNumber</label>
+			  <input type="text" th:field="*{ccNumber}">
+		   		<p class = "Error"  th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}">Incorrect ccNumber</p>
+			  
+			  <label for="ccExpiration">ccExpiration</label>
+			  <input type="text" th:field="*{ccExpiration}">
+		   		<p class = "Error"  th:if="${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}">Incorrect ccExpiration</p>
+			  
+			  <label for="ccCVV">ccCVV</label>
+			  <input type="text" th:field="*{name}">
+		   		<p class = "Error"  th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
+		   		
+			  <label for="street">street</label>
+			  <input type="text" th:field="*{street}">
+		   		<p th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Incorrect street</p>
+			  <input type="submit">
+		
+	</div>
+
+</form>
+</body>
+</html>

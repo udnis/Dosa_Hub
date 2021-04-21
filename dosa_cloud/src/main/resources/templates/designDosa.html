@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html 	xmlns="http://www.w3.org/1999/xhtml"      
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title> Dosa Shop</title>
+</head>
+<body>
+	<h1>Welcome to...</h1>    
+	<img th:src="@{images/dosa.webp}"/>
+	<form method="POST" th.object="${design}" >
+		<div class="grid">
+			
+			<div class="ingredient-group" >
+				<h2>Design your OIL</h2>
+				<div class="ingredient-group-list" th:each="oils : ${oil}">
+					<input type="checkbox" name="ingredient" th.value="${oils.id}" />
+					<label th:text="${oils.id}"> </label><br>					
+				</div>
+			</div>
+			<h2>Design your Batter</h2>
+			<div class="ingredient-group" th:each="bat : ${batter}">
+					<input type="checkbox" name="ingredient" th:value="${bat.id}" />
+					<label th:text="${bat.id}"> </label><br>	
+			</div>
+			<h2>Design your Shape</h2>
+			<div class="ingredient-group" th:each="shp : ${shape}">
+					<input type="checkbox" name="ingredient" th:value="${shp.id}" />
+					<label th:text="${shp.id}"> </label><br>	
+			</div>	
+			<div>
+					<label >Enter your Dosa name here </label><br>
+					<input type="text" name="dosa-name"  />
+						
+			</div>
+			<div>
+					<label >Enter your Dosa name here </label><br>
+					<input type="submit" name="dosa-create"  />
+						
+			</div>
+			
+		</div>
+	</form>
+</body>
+</html>
