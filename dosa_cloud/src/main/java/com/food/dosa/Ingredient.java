@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Ingredients {
+public class Ingredient {
 	
 	private  String id;
 	private  Type type;

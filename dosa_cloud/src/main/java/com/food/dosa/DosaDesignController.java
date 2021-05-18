@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.Errors;
 
-import com.food.dosa.Ingredients.Type;
+import com.food.dosa.Ingredient.Type;
 
 //import com.food.dosa.Ingredients.Type;
 
@@ -26,10 +26,15 @@ import com.food.dosa.Ingredients.Type;
 @RequestMapping("/design")
 public class DosaDesignController {
 	
-	public List<Ingredients> filterByType(Type type, List<Ingredients>list) { 		//Return all the ingredients type //name and its id
+	private final IngredientRepository ingredientRepository;
+	
+	public DosaDesignController(IngredientRepository ingredientRepository) {
+		this.ingredientRepository=ingredientRepository;
+	}
+	public List<Ingredient> filterByType(Type type, List<Ingredient>list) { 		//Return all the ingredients type //name and its id
 		
-		List <Ingredients> typeList = new ArrayList<Ingredients>();
-		for(Ingredients ing:list) {
+		List <Ingredient> typeList = new ArrayList<Ingredient>();
+		for(Ingredient ing:list) {
 			if(ing.getType().equals(type)) {
 				typeList.add(ing);
 			}
@@ -38,21 +43,13 @@ public class DosaDesignController {
 	}
 	@GetMapping
 	public String selectDesignForm(Model model) {
-		List<Ingredients> list = new ArrayList<Ingredients>();
-		list.add(new Ingredients("OISU",Type.OIL,"sunflower"));
-		list.add(new Ingredients("OISE",Type.OIL,"seasame"));
-		list.add(new Ingredients("OIGR",Type.OIL,"groundnut"));
-		list.add(new Ingredients("BAWH",Type.BATTER,"Wheat"));
-		list.add(new Ingredients("BARA",Type.BATTER,"Ragi"));
-		list.add(new Ingredients("BARI",Type.BATTER,"Rice"));
-		list.add(new Ingredients("SHTR",Type.SHAPE,"Triangle"));
-		list.add(new Ingredients("SHSQ",Type.SHAPE,"Square"));
-		list.add(new Ingredients("SHCI",Type.SHAPE,"Cirle"));
+		List<Ingredient> ingredients = new ArrayList<Ingredient>();
 		
+		ingredientRepository.findAll().forEach(i -> ingredients.add(i));
+				
 		for(Type type:Type.values()) {
-			model.addAttribute(type.toString().toLowerCase(), filterByType(type,list));
+			model.addAttribute(type.toString().toLowerCase(), filterByType(type,ingredients));
 		}
-		
 		
 		model.addAttribute("design", new DosaPrototype());
 		return "designDosa";
